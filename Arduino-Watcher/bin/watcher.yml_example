@@ -1,0 +1,7 @@
+pidbase: /tmp/run
+# watcher params
+load_url: http://host.com/cgi-bin/load
+interval: 10
+orange_threshold: 2
+red_threshold: 5
+debug: 1
