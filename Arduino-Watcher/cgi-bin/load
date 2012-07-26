@@ -1,0 +1,16 @@
+#!/files/tools/bin/perl
+
+use strict;
+use CGI;
+
+my $Page=new CGI;
+my $uptime = `uptime`;
+my $load1 = "Error"; # Fallback
+
+if ($uptime =~ /load average: (.*?), /){
+ $load1 = $1;
+}
+
+print $Page->header('text/plain');
+
+print $load1."\n";
