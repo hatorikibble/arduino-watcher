@@ -13,6 +13,7 @@ requires 'namespace::autoclean';
 requires 'MooseX::Daemonize';
 requires 'MooseX::Runnable';
 requires 'MooseX::Log::Log4perl';
+requires 'MooseX::SimpleConfig';
 requires 'Device::SerialPort::Arduino';
 requires 'LWP::UserAgent';
 requires 'Log::Log4perl';
