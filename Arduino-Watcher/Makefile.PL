@@ -20,7 +20,7 @@ requires 'Log::Log4perl';
 requires 'Config::Any::YAML';
 requires 'CGI';
 
-install_script glob('script/*.pl');
+#install_script glob('bin/*.pl');
 auto_install;
 
 WriteAll;

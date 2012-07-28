@@ -33,15 +33,39 @@ Peter Mayr <at.peter.mayr@gmail.com>
 
 =head2 new_with_options( load_url => 'http://host.com/cgi-bin/load', interval => 10);
 
-folgende Parameter koennen uebergeben werden
+the following parameters are accepted
 
 =over
 
 =item * pidbase (optional):
 
-Verzeichnis in dem die PID-Datei erzeugt wird
+Verzeichnis in which the PID File is created
 
-=item * 
+=item * arduino_port
+
+device path for the arduino
+
+=item * load_url
+
+Location of the CGI script
+
+=item * interval (optional)
+
+interval in which load_url is polled, default is 10 seconds
+
+=item * orange_threshold
+
+load to set the LED to orange
+
+=item * red_threshold
+
+load to set the LED to red
+
+=item * debug
+
+debug flag, if set no output to Arduino is written
+
+=back
 
 =cut
 
@@ -76,6 +100,12 @@ has 'orange_threshold' => ( is=> 'ro', isa=>'Int', default=>2 );
 has 'red_threshold' => ( is=> 'ro', isa=>'Int', default=>5 );
 
 Log::Log4perl::init($Bin.'/logging.conf');
+
+=head2 run
+
+called by the perl script
+
+=cut
 
 sub run {
     my $self = shift;
