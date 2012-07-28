@@ -69,7 +69,7 @@ with qw(MooseX::SimpleConfig MooseX::Getopt MooseX::Log::Log4perl MooseX::Daemon
 #with qw(MooseX::Daemonize MooseX::Runnable  );
 has 'dont_close_all_files' => (is => 'ro', isa=>'Bool', default=>1);
 has 'debug' => (is => 'ro', isa=>'Bool', default=>0);
-has 'port'  => ( is => 'ro', isa => 'Str', default  => '/dev/ttyACM0' );
+has 'arduino_port'  => ( is => 'ro', isa => 'Str', default  => '/dev/ttyACM0' );
 has 'load_url' => ( is => 'ro', isa => 'Str', required => 1 );
 has 'interval' => ( is=> 'ro', isa=>'Int', default=>10 );
 has 'orange_threshold' => ( is=> 'ro', isa=>'Int', default=>2 );
@@ -92,7 +92,7 @@ after start => sub {
 
     unless ( $self->debug ) {
         $Arduino = Device::SerialPort::Arduino->new(
-            port     => $self->port,
+            port     => $self->arduino_port,
             baudrate => 9600,
 
             databits => 8,
@@ -113,15 +113,15 @@ after start => sub {
 
             if ( $load > $self->red_threshold ) {
                 $self->log->error("Load ist $load");
-                $msg = "red";
+                $msg = "r";
             }
             elsif ( $load > $self->orange_threshold ) {
                 $self->log->warn("Load ist $load");
-                $msg = "orange";
+                $msg = "o";
             }
             else {
-                $self->log->debug(" x Load ist $load");
-                $msg = "green";
+                $self->log->debug("Load ist $load");
+                $msg = "g";
             }
             $Arduino->communicate($msg) unless ( $self->debug );
             sleep( $self->interval );
